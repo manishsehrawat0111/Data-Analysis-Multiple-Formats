@@ -54,6 +54,22 @@ def csv_file(file_path):
     print(df.isnull().sum())
     print("\n count empty values in each column after cleaning:")
 
+    engine=create_engine(
+        "mysql+pymysql://pandas:pandas@localhost/pandasdb",
+        echo=True)
+    
+    with engine.connect() as conn:
+        result=conn.execute(text("select database();"))
+        print("\n connected to :",result.fetchone())
+
+    df.to_sql("students_performance_data",
+              con=engine,
+              if_exists ="replace",
+              index=False)
+    print("\n✅ data exported to mysql pandasdb database succesfully")
+
+    print(pd.read_sql("select * from students_performance_data limit 10;",engine))
+
     
 
 
