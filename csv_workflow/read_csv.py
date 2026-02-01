@@ -72,7 +72,7 @@ def csv_file(file_path):
     
     # visualization 
 
-    # participation on the bases gender for compatative exam
+    # participation on the bases of gender for exam
     
     column1=df.groupby("gender")["math_score"].mean()
     labels=column1.index
@@ -82,19 +82,18 @@ def csv_file(file_path):
     # pie plot
     axs[0].pie(column1,colors=["pink","blue","orange","skyblue"],labels=labels,
             autopct="%1.1f%%",startangle=90,shadow=True)
-    axs[0].set_title("participation on bases gender for compative exam")
 
     # bar plot
     axs[1].bar(labels,column1,color=["pink","blue","orange","skyblue"])
-    axs[1].set_title("participation on babses gander for compative exam")
     axs[1].set_xlabel("gender")
     axs[1].set_ylabel("mean of genders")
     axs[1].grid()
     
+    fig.suptitle("participation on the bases of gender for exam")
     plt.tight_layout()
     plt.show()
 
-    # comparision of math_score,reading_score,attendance_score on the bases gender for comptative exam
+    # comparision of math_score,reading_score,attendance_score on the bases gender for exam
 
     column1=df.groupby("gender")["math_score"].mean()
     column2=df.groupby("gender")["reading_score"].mean()
@@ -106,7 +105,6 @@ def csv_file(file_path):
     axs[0].plot(labels,column1,color="blue",linestyle="-",marker="o",label="mean of math_score")
     axs[0].plot(labels,column2,color="yellow",linestyle="--",marker="s",label="mean of reading_score")
     axs[0].plot(labels,column3,color="pink",linestyle=":",marker="*",label="mean of attendance_percent")
-    axs[0].set_title("mean of math_score,reading_score,attendance_percent")
     axs[0].set_xlabel("gender")
     axs[0].set_ylabel("mean")
     axs[0].legend(loc='upper left', bbox_to_anchor=(1, 1))
@@ -117,14 +115,48 @@ def csv_file(file_path):
     axs[1].bar(x-width,column1,width,color="blue",label="mean of math_score")
     axs[1].bar(x,column2,width,color="yellow",label="mean of reading_score")
     axs[1].bar(x+width,column3,width,color="pink",label="mean of attendance_percent")
-    axs[1].set_title("mean of math_score,reading_score,attendance_percent")
     axs[1].set_xlabel("gender")
     axs[1].set_ylabel("mean")
     axs[1].set_xticks(x,labels)
     axs[1].legend(loc='upper left', bbox_to_anchor=(1, 1))
 
+    fig.suptitle("mean of math_score,reading_score,attendance_percent on the bases gender")
     plt.tight_layout()
     plt.show()
+
+    # comparision of math_score,reading_score,attendance_percent on the bases city for exam
+
+    column1=df.groupby("city")["math_score"].mean()
+    column2=df.groupby("city")["reading_score"].mean()
+    column3=df.groupby("city")["attendance_percent"].mean()
+    labels=column1.index
+    fig,axs=plt.subplots(1,2,figsize=(14,5))
+    # line plot
+    axs[0].plot(labels,column1,color="blue",linestyle="-",marker="o",label="mean of math_score")
+    axs[0].plot(labels,column2,color="yellow",linestyle="--",marker="s",label="mean of reading_score")
+    axs[0].plot(labels,column3,color="pink",linestyle=":",marker="*",label="mean of attendance_percent")
+    axs[0].set_xlabel("city")
+    axs[0].set_ylabel("mean")
+    axs[0].legend(loc="upper left",bbox_to_anchor=(1,1))
+
+    # bar plot
+    x=np.arange(len(labels))
+    width=0.25
+    axs[1].bar(x-width,column1,width,color="blue",label="mean of math_score")
+    axs[1].bar(x,column2,width,color="yellow",label="mean of reading_score")
+    axs[1].bar(x+width,column3,width,color="pink",label="mean of attendance_percent")
+    axs[1].set_xlabel("city")
+    axs[1].set_label("mean")
+    axs[1].set_xticks(x)
+    axs[1].legend(loc="upper left",bbox_to_anchor=(1,1))
+    axs[0].set_xticklabels(labels, rotation=45, ha='right')
+    axs[1].set_xticklabels(labels, rotation=45, ha='right')
+
+
+    fig.suptitle("comparision of math_score,reading_score,attendance_percenton the bases of city for exam")
+    plt.tight_layout()
+    plt.show()
+
     
 
 
